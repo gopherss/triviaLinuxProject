@@ -2,7 +2,6 @@ package server
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -33,8 +32,6 @@ func (es *EchoServer) configure() {
 }
 
 func (es *EchoServer) Run() {
-
-	fmt.Println(es.port)
 	es.Logger.Fatal(es.Start(":" + es.port))
 }
 
@@ -51,7 +48,10 @@ func NewEchoServer(ctx context.Context, db *gorm.DB, appPort string) Server {
 	}
 
 	server.configure()
-	server.routes()
+	server.routesIndexLevel()
+	server.routesIndexQuestion()
+	server.routesIndexOption()
+	server.routesIndexUser()
 
 	return server
 }

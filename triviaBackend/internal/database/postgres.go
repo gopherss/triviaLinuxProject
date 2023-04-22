@@ -15,7 +15,7 @@ type PostgreSQL struct {
 
 func (p *PostgreSQL) ConnectDB() *gorm.DB {
 
-	chainConnection := fmt.Sprintf(
+	chainOfConnection := fmt.Sprintf(
 		"user=%s password=%s host=%s port=%s dbname=%s",
 		p.config.DB_USERNAME,
 		p.config.DB_PASSWORD,
@@ -24,18 +24,17 @@ func (p *PostgreSQL) ConnectDB() *gorm.DB {
 		p.config.DB_DATABASE,
 	)
 
-	db, err := gorm.Open(postgres.Open(chainConnection), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(chainOfConnection), &gorm.Config{})
 
 	if err != nil {
 		log.Fatal("Failed to connect database")
-	} else {
-		fmt.Println("Connection success.")
 	}
 
-	/* db.AutoMigrate(&models.Level{})
-	db.AutoMigrate(&models.Question{})
-	db.AutoMigrate(&models.User{})
-	db.AutoMigrate(&models.Option{})
+	/*
+		db.AutoMigrate(&models.Level{})
+		db.AutoMigrate(&models.Question{})
+		db.AutoMigrate(&models.User{})
+		db.AutoMigrate(&models.Option{})
 	*/
 	return db
 }
